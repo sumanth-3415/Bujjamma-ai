@@ -1,0 +1,22 @@
+{
+  "identity": {
+    "assistant_name": {
+      "value": "Bhujamma",
+      "updated": "2026-05-27"
+    },
+    "name": {
+      "value": "Sumanth",
+      "updated": "2026-05-27"
+    }
+  },
+  "preferences": {
+    "language_preference": {
+      "value": "English or Telugu",
+      "updated": "2026-05-27"
+    }
+  },
+  "projects": {},
+  "relationships": {},
+  "wishes": {},
+  "notes": {}
+}

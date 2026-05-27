@@ -9,7 +9,7 @@ A real-time voice AI that can hear, see, understand, and control your computer �
 
 ## ✨ Overview
 
-sumanth represents the pinnacle of the Bujjamma series, evolving into a more flexible and robust system. It bridges the gap between the operating system and human intent. Through natural dialogue, it understands your goals and autonomously executes them.
+sumanth represents the pinnacle of the Bujjamma series, evolving into a more flexible and robust system. It bridges the gap between the operating system and human intent. Through natural dialogue, it becomes smarter, faster, and more attuned to your unique workflow.
 
 It's not just an assistant — it's an extension of your digital life.
 
@@ -48,7 +48,7 @@ playwright install
 python main.py
 ```
 
-> ⚠️ **Installation Note:** To keep the repository lightweight, some OS-specific dependencies are not bundled in `requirements.txt`. If you run into a `ModuleNotFoundError`, simply install the missing package with `pip install <package-name>`.
+> ⚠️ **Installation Note:** To keep the repository lightweight, some OS-specific dependencies are not bundled in `requirements.txt`. If you run into a `ModuleNotFoundError`, simply install the missing module with pip.
 
 ---
 
@@ -60,10 +60,3 @@ python main.py
 | **Python** | 3.11 or 3.12 |
 | **Microphone** | Required for voice interaction |
 | **API Key** | Free Gemini API key |
-
----
-
-## ⚠️ License
-
-Personal and non-commercial use only.
-Licensed under **[Creative Commons BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)**.

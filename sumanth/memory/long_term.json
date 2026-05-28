@@ -1,7 +1,7 @@
 {
   "identity": {
     "assistant_name": {
-      "value": "Bhujamma",
+      "value": "Bujjamma",
       "updated": "2026-05-27"
     },
     "name": {
@@ -11,12 +11,17 @@
   },
   "preferences": {
     "language_preference": {
-      "value": "English or Telugu",
+      "value": "Telugu",
       "updated": "2026-05-27"
     }
   },
   "projects": {},
-  "relationships": {},
+  "relationships": {
+    "relationship_to_sumanth": {
+      "value": "Aunt",
+      "updated": "2026-05-27"
+    }
+  },
   "wishes": {},
   "notes": {}
 }

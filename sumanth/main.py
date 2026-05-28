@@ -1,7 +1,7 @@
 import ctypes
 ctypes.windll.user32.ShowWindow(
     ctypes.windll.kernel32.GetConsoleWindow(),
-    0
+    0  # SW_HIDE
 )
 import asyncio
 import re
@@ -39,13 +39,31 @@ from actions.game_updater      import game_updater
 
 
 def get_base_dir():
-    if getattr(sys, "frozen", False):
+    import sys
+    from pathlib import Path
+
+    if getattr(sys, 'frozen', False):
         return Path(sys.executable).parent
+
     return Path(__file__).resolve().parent
 
 
-BASE_DIR        = get_base_dir()
+BASE_DIR= get_base_dir()
 API_CONFIG_PATH = BASE_DIR / "config" / "api_keys.json"
+# Create config folder automatically
+API_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+# Create default config file if missing
+if not API_CONFIG_PATH.exists():
+    API_CONFIG_PATH.write_text(
+        '''
+{
+    "gemini_api_key": "AIzaSyAwsof6dD4wm50jPidqGiClKRU0977A4Us",
+    "os_system": "windows"
+}
+'''.strip(),
+        encoding="utf-8"
+    )
 PROMPT_PATH     = BASE_DIR / "core" / "prompt.txt"
 LIVE_MODEL          = "models/gemini-2.5-flash-native-audio-preview-12-2025"
 CHANNELS            = 1
@@ -867,6 +885,7 @@ class BujjammaLive:
             self.ui.set_state("THINKING")
             print("[Bujjamma] 🔄 Reconnecting in 3s...")
             await asyncio.sleep(3)
+
 
 def main():
     ui = BujjammaUI("face.png")

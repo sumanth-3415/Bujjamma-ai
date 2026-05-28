@@ -7,9 +7,18 @@ import platform
 import random
 import subprocess
 import sys
+
 import threading
 import time
 from pathlib import Path
+import ctypes
+try:
+    ctypes.windll.user32.ShowWindow(
+        ctypes.windll.kernel32.GetConsoleWindow(),
+        0
+    )
+except:
+    pass
 
 import psutil
 
@@ -127,7 +136,8 @@ class _SysMetrics:
             r = subprocess.run(
                 ["nvidia-smi", "--query-gpu=utilization.gpu",
                  "--format=csv,noheader,nounits"],
-                capture_output=True, text=True, timeout=2
+                capture_output=True, text=True, timeout=2,
+                creationflags=subprocess.CREATE_NO_WINDOW
             )
             if r.returncode == 0:
                 vals = [float(v.strip()) for v in r.stdout.strip().split("\n") if v.strip()]
@@ -141,7 +151,8 @@ class _SysMetrics:
             try:
                 r = subprocess.run(
                     ["rocm-smi", "--showuse", "--csv"],
-                    capture_output=True, text=True, timeout=2
+                    capture_output=True, text=True, timeout=2,
+                    creationflags=subprocess.CREATE_NO_WINDOW
                 )
                 if r.returncode == 0:
                     for line in r.stdout.strip().split("\n"):
@@ -158,7 +169,8 @@ class _SysMetrics:
             try:
                 r = subprocess.run(
                     ["intel_gpu_top", "-J", "-s", "500"],
-                    capture_output=True, text=True, timeout=1
+                    capture_output=True, text=True, timeout=1,
+                    creationflags=subprocess.CREATE_NO_WINDOW
                 )
                 if r.returncode == 0 and "Render/3D" in r.stdout:
                     import re
@@ -174,7 +186,8 @@ class _SysMetrics:
                 r = subprocess.run(
                     ["sudo", "-n", "powermetrics", "-n", "1", "-i", "500",
                      "--samplers", "gpu_power"],
-                    capture_output=True, text=True, timeout=2
+                    capture_output=True, text=True, timeout=2,
+                    creationflags=subprocess.CREATE_NO_WINDOW
                 )
                 if r.returncode == 0 and "GPU" in r.stdout:
                     import re
@@ -204,7 +217,8 @@ class _SysMetrics:
         if _OS == "Darwin":
             try:
                 r = subprocess.run(
-                    ["osx-cpu-temp"], capture_output=True, text=True, timeout=2
+                    ["osx-cpu-temp"], capture_output=True, text=True, timeout=2,
+                    creationflags=subprocess.CREATE_NO_WINDOW
                 )
                 if r.returncode == 0:
                     import re
@@ -219,7 +233,8 @@ class _SysMetrics:
                 r = subprocess.run(
                     ["powershell", "-Command",
                      "(Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace root/wmi).CurrentTemperature"],
-                    capture_output=True, text=True, timeout=3
+                    capture_output=True, text=True, timeout=3,
+                    creationflags=subprocess.CREATE_NO_WINDOW
                 )
                 if r.returncode == 0 and r.stdout.strip():
                     raw = float(r.stdout.strip().split("\n")[0])
@@ -1463,7 +1478,7 @@ class BujjammaUI:
 
         self._win = MainWindow(face_path)
         self._win.setWindowFlags(
-    Qt.WindowType.FramelessWindowHint |Qt.WindowType.WindowStaysOnBottomHint
+    Qt.WindowType.FramelessWindowHint |Qt.WindowType.FramelessWindowHint
 )
         self._win.setAttribute(
             Qt.WidgetAttribute.WA_TranslucentBackground

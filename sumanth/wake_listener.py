@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import subprocess
+import os
 
 recognizer = sr.Recognizer()
 
@@ -15,9 +16,16 @@ while True:
 
         print("You said:", text)
 
-        if "jarvis" in text:
-            subprocess.Popen(
-                r"C:\Users\linga\Downloads\Program files\Bujjamma\sumanth\dist\Bujjamma\Bujjamma.exe"
+        if any(word in text for word in [
+            "jarvis",
+            "jarves",
+            "jervis",
+            "jarviss"
+        ]):
+            print("WAKE WORD DETECTED")
+
+            os.startfile(
+                r"C:\Users\linga\Downloads\Program files\Bujjamma\sumanth\dist\Bujjamma.exe"
             )
 
     except Exception:

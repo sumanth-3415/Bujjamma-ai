@@ -56,7 +56,7 @@ API_CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
 # Create default config file if missing
 if not API_CONFIG_PATH.exists():
     import os
-    api_key = os.getenv("GEMINI_API_KEY", "YOUR_API_KEY_HERE")
+    api_key = os.getenv("GEMINI_API_KEY", "")
     API_CONFIG_PATH.write_text(
         f'''
 {{

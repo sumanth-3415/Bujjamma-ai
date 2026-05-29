@@ -58,7 +58,7 @@ if not API_CONFIG_PATH.exists():
     API_CONFIG_PATH.write_text(
         '''
 {
-    "gemini_api_key": "AIzaSyAwsof6dD4wm50jPidqGiClKRU0977A4Us",
+    "gemini_api_key": "",
     "os_system": "windows"
 }
 '''.strip(),
